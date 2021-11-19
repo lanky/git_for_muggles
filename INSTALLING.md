@@ -46,7 +46,7 @@ Anyway, to make sure all is well, you'll need to open a terminal on your OS of c
 
     git --version
 
-And it should look like one of these:
+And it should look like the 'git' line in one of these:
 
 <img src="images/is-it-all-working-windows.png" max-width="50%">
 
