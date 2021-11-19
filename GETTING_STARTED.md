@@ -3,7 +3,11 @@
 ## install it
 If you don't already have git, you can install it from [here](https://git-scm.com/)
 
+### on windows
+get the latest (as of the date I wrote this) maintained version from [here](https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-64-bit.exe) and run it.
+
 ## get a github account
+
 If you don't already have one, you'll need to if you want to keep changes on there.
 Private repositories are free and easily available on github, so your code is hidden from prying eyes.
 
@@ -15,8 +19,8 @@ On mac, at least, to do some of the commandline stuff you'll want a non-terrible
 
 This doc will cover 2 very basic workflows
 
-    * working on a repository that already exists
-    * starting one from scratch, on github.
+* working on a repository that already exists
+* starting one from scratch, on github.
 
 The first is a good way to get used to a git workflow.
 
@@ -26,14 +30,14 @@ Once you know how to operate it, you can start using it for your own projects.
 
 ## intro
 This part will cover the following things (the git commands in parentheses in each point)
-  * getting a local copy of the code from a central server (*clone*)
-  * updating a local copy if you already have one (*pull*)
-  * creating a new branch for your changes (*checkout*)
-  * making changes to a file
-  * seeing what you've changed (*status*)
-  * staging the changes (*add*)
-  * saving the changes to git history (*commit*)
-  * sending the changes to the remote repository (*push*)
+* getting a local copy of the code from a central server (*clone*)
+* updating a local copy if you already have one (*pull*)
+* creating a new branch for your changes (*checkout*)
+* making changes to a file
+* seeing what you've changed (*status*)
+* staging the changes (*add*)
+* saving the changes to git history (*commit*)
+* sending the changes to the remote repository (*push*)
 
 For now we will be doing all the git stuff using a terminal, although you can do it in an number of editors and code tools.
 
@@ -44,7 +48,19 @@ VSCode - microsoft visual studio (free)  - very good actually.
 
 ### Download a copy of the repository
 
-    git clone https://github.com/karaukeband/karauke_udn
+This is called `cloning` because that's basically what it does - creates an identical copy of the files on your local machine.
+
+```sh
+$ git clone https://github.com/karaukeband/karauke_udn
+Cloning into 'karauke_udn'...
+Username for 'https://github.com': YOURUSERNAME
+Password for 'https://lanky@github.com': YOURPASSWORD
+remote: Enumerating objects: 278, done.
+remote: Counting objects: 100% (278/278), done.
+remote: Compressing objects: 100% (277/277), done.
+remote: Total 278 (delta 0), reused 278 (delta 0), pack-reused 0
+Receiving objects: 100% (278/278), 162.96 KiB | 2.91 MiB/s, done.
+```
 
 This will create a local directory (folder, if you prefer) called `karauke_udn` and put all the remote files in it.
 You'll need to be in that directory to do anything to it now, so
@@ -53,8 +69,13 @@ You'll need to be in that directory to do anything to it now, so
 
 ### Inspect your copy and its history
 Inside the repository you can run git commands to see what's going on. There won't be much yet.
+```
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
 
-    git status
+nothing to commit, working tree clean
+```
 
 Will show you the current state of your copy, including whether you have any local changes that you haven't committed yet.
     
@@ -62,11 +83,11 @@ Will show you the current state of your copy, including whether you have any loc
 
 will list the files git knows about. Which should be all of them.
 
-    git log -10
+    git log -4
 
 will show you the last 10 commits on the current branch:
 ```git
-    $ git log -10
+    $ git log -4
     commit 19c1c85e4c932cef6fd957f52c54abcecc9d5885 (HEAD -> master)
     Author: Stuart Sears <stuart@sjsears.com>
     Date:   Thu Feb 13 17:43:36 2020 +0000
@@ -93,6 +114,62 @@ will show you the last 10 commits on the current branch:
 
         removes D from interludes
 ```
+
+### Do some stuff
+Let's edit a file and see what happens.
+
+First, to avoid mucking anything important up (although it will all be recoverable), let's work on a custom branch
+
+    git checkout -b git_training
+
+(this is a shortcut, you could also have used `git branch git_training` followed by `git checkout git_training` to change to the new branch)
+
+
+This creates a new branch called `git_training` and switches you to it. Any changes you make now cannot affect the main 'live' book without deliberate action.
+
+Pick a file from the `current` directory and make some changes to it
+
+Here's a childish example:
+
+    echo 'poo' >> current/im_a_believer_-_the_monkees.udn
+
+(make sure there are 2 chevrons (>>) not just one)
+
+the non-commandline version would be to open the `current/im_a_believer_-_the_monkees.udn` file in a text editor (like Notepad, Notepad++, but definitely not Word, LibreOffice Writer or a similar word processor) and adding the work 'poo' at the end of the document.
+
+Once you've changed the file, let's see what git thinks:
+
+```sh
+$ git status
+On branch git_training
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   current/im_a_believer_-_the_monkees.udn
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+```
+
+so, git has noticed you've changed the file. Let's get it to show us what you did:
+
+    $ git diff current/im_a_believer_-_the_monkees.udn
+```diff
+diff --git a/current/im_a_believer_-_the_monkees.udn b/current/im_a_believer_-_the_monkees.udn
+index 4b6f7d3..c1d899e 100644
+--- a/current/im_a_believer_-_the_monkees.udn
++++ b/current/im_a_believer_-_the_monkees.udn
+@@ -50,3 +50,4 @@ I couldn't (F)leave her if I (D)tried
+ 
+ {skatty ending over chorus chords x 1 then cha cha end}
+ 
++poo
+
+```
+
+As you can see, it shows you having added the word 'poo' and shows you some context lines and line numbers to show where in the file you made this change.
+
+
 
 
 
