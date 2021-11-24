@@ -9,10 +9,14 @@ You may also need a working terminal client and text editor, so they're covered 
 
 ## Git installation per platform
 
+### Windows
+
 For Windows, which is more complicated than most, you can follow the step-by-step instructions in
 [Installing Git on Windows](git-on-windows.md)
 
 Alterntively, on modern windows you could install the Windows Subsystem for Linux (WSL)
+
+### Mac
 
 For Mac, the best way to install it appears to use homebrew - you'll need to use a terminal for
 that.
@@ -23,6 +27,8 @@ Once all that is done, in a terminal window, run
 
     brew install git
 
+### Linux, or WSL (Windows Subsystem for Linux)
+
 On Linux systems (yeah, I know this is just me), it'll probably be either
 
     apt install git
@@ -31,7 +37,8 @@ Or
 
     dnf install git
 
-or an equivalent for your distribution of choice.
+or an equivalent for your distribution of choice, if you have one, you probably already know how to
+do this.
 
 This should also work for the Windows Subsystem for Linux, if you've got your geek on.
 
