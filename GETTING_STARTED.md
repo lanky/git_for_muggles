@@ -41,7 +41,7 @@ This part will cover the following things (the git commands in parentheses in ea
 
 For now we will be doing all the git stuff using a terminal, although you can do it in an number of editors and code tools.
 
-GitHub actually provide a github desktop app and an editor called Atox
+GitHub actually provide a github desktop app and an editor called Atom
 VSCode - microsoft visual studio (free)  - very good actually.
 
 ## The commands bit
@@ -81,7 +81,7 @@ Will show you the current state of your copy, including whether you have any loc
     
     git ls-files
 
-will list the files git knows about. Which should be all of them.
+will list the files git knows about. Which should be all of them and may be a long list.
 
     git log -4
 
@@ -112,8 +112,37 @@ will show you the last 10 commits on the current branch:
     Author: Stuart Sears <stuart@sjsears.com>
     Date:   Wed Feb 12 09:12:49 2020 +0000
 
-        removes D from interludes
+        removes D from interlude
 ```
+## making changes to the repository
+
+While you could go ahead and start editing things, the normal approach is to create a new branch (and in the case of the `karauke_udn` repository it's required - you can't push directly to the live book). A custom branch is also easily discarded for when you inevitably screw things up. And you will, everybody does when theya re new to git.
+
+So, to make changes we will
+  * create a new 'feature' branch
+  * change to the new branch
+  * edit away to our heart's content
+  * commit the things we want to keep
+  * when we're happy, push them to github, keeping them in our new branch
+  * create what is known as a pull request to ask someone else to review them and merge them into the master branch, which in this repo is used for the live book.
+
+Let's get on with it...
+
+### Creating a new branch
+branches are really easy to create in git, and are 'cheap' - they don't create new copies of files, so their creation is more or less instantaneous.
+
+    git branch
+
+will show you branches that exist locally, and which one you are on, marked with a  '*'
+```
+$ git branch
+* master
+```
+There may be other branches that exist on the remote server, we don't care about those.
+
+    git branch muggles
+
+Will create a branch, based on the last commit from your current branch (which is master, unless you've been cheating)
 
 ### Do some stuff
 Let's edit a file and see what happens.
@@ -125,7 +154,9 @@ First, to avoid mucking anything important up (although it will all be recoverab
 (this is a shortcut, you could also have used `git branch git_training` followed by `git checkout git_training` to change to the new branch)
 
 
-This creates a new branch called `git_training` and switches you to it. Any changes you make now cannot affect the main 'live' book without deliberate action.
+This creates a new branch called `git_training` and switches you to it.
+Any changes you make now cannot affect the main 'live' book without
+deliberate action.
 
 Pick a file from the `current` directory and make some changes to it
 
@@ -135,7 +166,9 @@ Here's a childish example:
 
 (make sure there are 2 chevrons (>>) not just one)
 
-the non-commandline version would be to open the `current/im_a_believer_-_the_monkees.udn` file in a text editor (like Notepad, Notepad++, but definitely not Word, LibreOffice Writer or a similar word processor) and adding the work 'poo' at the end of the document.
+The non-commandline version would be to open the `current/im_a_believer_-_the_monkees.udn`
+file in a text editor (like Notepad, Notepad++, but definitely not Word, LibreOffice Writer 
+or a similar word processor) and adding the work 'poo' at the end of the document.
 
 Once you've changed the file, let's see what git thinks:
 
@@ -168,13 +201,3 @@ index 4b6f7d3..c1d899e 100644
 ```
 
 As you can see, it shows you having added the word 'poo' and shows you some context lines and line numbers to show where in the file you made this change.
-
-
-
-
-
-
-
-
-
-
